@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <h2>Recipe Details</h2>
 <h3>{{name}} by {{author}}</h2>
   <ul>
@@ -8,4 +9,11 @@
     <li>{{ingredient}}</li>
     {% endfor %}
   </ul>
+
+<h3>Images</h3>
+  {% for img in recipe.images.all %}
+      <img src="{{ img.image.url }}" alt="{{ img.description }}">
+  {% empty %}
+      <p>No images uploaded yet.</p>
+  {% endfor %}
 {% endblock %}
