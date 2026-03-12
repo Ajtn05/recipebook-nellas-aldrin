@@ -3,14 +3,14 @@
 
 {% block title %}Recipe List{% endblock %}
 {% block content %}
-    <h2>Recipe List</h2>
-    {% for recipe in recipes %}
-        <ul><a href="{{ recipe.get_absolute_url }}">{{ recipe.name }}</a></ul>
-    {% endfor %}
 
 {% if user.is_authenticated %}
-    <a href="{% url 'recipes:add_image' recipe.pk %}">Upload New Image</a>
-  {% endif %}
+<a href="{% url 'ledger:recipe_add' %}">Create a recipe</a>
+{% endif %}
 
-  <a href="{% url 'recipes:recipe_list' %}">Back to Recipe List</a>
+<h2>Recipe List</h2>
+{% for recipe in recipes %}
+    <ul><a href="{{ recipe.get_absolute_url }}">{{ recipe.name }}</a></ul>
+{% endfor %}
+
 {% endblock%}

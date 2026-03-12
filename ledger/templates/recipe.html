@@ -4,16 +4,25 @@
 
 <h2>Recipe Details</h2>
 <h3>{{name}} by {{author}}</h2>
-  <ul>
-    {% for ingredient in ingredients %}
-    <li>{{ingredient}}</li>
-    {% endfor %}
-  </ul>
 
-<h3>Images</h3>
+{% if user.is_authenticated %}
+
   {% for img in recipe.images.all %}
-      <img src="{{ img.image.url }}" alt="{{ img.description }}">
+      <img src="{{ img.image.url }}" alt="{{ img.description }}", width="300px">
   {% empty %}
       <p>No images uploaded yet.</p>
   {% endfor %}
+  <br>
+  <a href="{% url 'ledger:recipe_add_image' recipe.pk %}">Upload new image for this recipe</a>
+  {% endif %}
+
+<ul>
+  {% for ingredient in ingredients %}
+  <li>{{ingredient}}</li>
+  {% endfor %}
+</ul>
+
+<br>
+<a href="{% url 'ledger:recipe_list' %}">Back to list</a>
+
 {% endblock %}
