@@ -10,8 +10,8 @@ def recipe_list(request):
     return render(request, "recipe_list.html", context)
 
 @login_required
-def recipe(request, name):
-    recipe = Recipe.objects.get(name=name)
+def recipe(request, pk):
+    recipe = Recipe.objects.get(pk=pk)
     ingredients = recipe.ingredients.all()
     context = {
         'recipe': recipe,
@@ -22,7 +22,7 @@ def recipe(request, name):
     return render(request, "recipe.html", context)
 
 def recipe_add(request):
-    profile = Profile.objects.get(user=request.user)
+    profile, created = Profile.objects.get_or_create(user=request.user)
 
     if request.method == "POST":
         form = RecipeForm(request.POST)
